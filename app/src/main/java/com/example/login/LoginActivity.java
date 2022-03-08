@@ -2,39 +2,44 @@ package com.example.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 
 public class LoginActivity extends AppCompatActivity {
 
+    LoginAdapter loginAdapter;
     TabLayout tabLayout;
-    ViewPager viewPager;
+    ViewPager2 viewPager2;
     FloatingActionButton google;
     float v = 0;
+    private String[] titles = new String[]{"Login", "Signup"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
 
 
         tabLayout = findViewById(R.id.tab_layout);
-        viewPager = findViewById(R.id.view_pager);
+        viewPager2 = findViewById(R.id.view_pager);
         google = findViewById(R.id.google);
+        loginAdapter = new LoginAdapter(this);
+
+        viewPager2.setAdapter(loginAdapter);
 
         tabLayout.addTab(tabLayout.newTab().setText("Login"));
         tabLayout.addTab(tabLayout.newTab().setText("SignUp"));
         tabLayout.setTabGravity((TabLayout.GRAVITY_FILL));
 
-        final LoginAdapter adapter = new LoginAdapter(getSupportFragmentManager(), this,tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        new TabLayoutMediator(tabLayout, viewPager2, ((tab, position) -> tab.setText(titles[position]))).attach();
 
         google.setTranslationY(300);
         tabLayout.setTranslationY(300);

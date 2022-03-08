@@ -25,11 +25,11 @@ public class SignupTabFragment extends Fragment {
         nombre = root.findViewById(R.id.nombre);
         signup = root.findViewById(R.id.Btn_signup);
 
-        email.setTranslationX(800);
-        contraseña.setTranslationX(800);
-        confcontraseña.setTranslationX(800);
-        nombre.setTranslationX(800);
-        signup.setTranslationX(800);
+        email.setTranslationX(0);
+        contraseña.setTranslationX(0);
+        confcontraseña.setTranslationX(0);
+        nombre.setTranslationX(0);
+        signup.setTranslationX(0);
 
         email.setAlpha(v);
         contraseña.setAlpha(v);

@@ -2,28 +2,25 @@ package com.example.login;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.content.Context;
+
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class LoginAdapter extends FragmentPagerAdapter {
+public class LoginAdapter extends FragmentStateAdapter {
 
-    private Context context;
-    int totalTabs;
+    private String[] titles = new String[]{"Login", "Signup"};
 
-    public LoginAdapter(FragmentManager fm, Context context, int totalTabs) {
-        super(fm);
-        this.context = context;
-        this.totalTabs = totalTabs;
+    public LoginAdapter(@NonNull FragmentActivity fragmentActivity) {
+        super(fragmentActivity);
+
     }
 
-    @Override
-    public int getCount() {
-        return totalTabs;
-    }
 
     @NonNull
     @Override
-    public Fragment getItem(int position) {
+    public Fragment createFragment(int position) {
         switch (position) {
             case 0:
                 LoginTabFragment loginTabFragment = new LoginTabFragment();
@@ -34,8 +31,13 @@ public class LoginAdapter extends FragmentPagerAdapter {
             default:
                 return null;
         }
+
     }
 
+    @Override
+    public int getItemCount() {
+        return titles.length;
+    }
 }
 
 
